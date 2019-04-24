@@ -1,75 +1,34 @@
+<!doctype html>
 <html>
-<head>
-    <title>A D3 map</title>
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="boston_neighborhoods.json"></script>
+  <head>
+
+    <title>Base template for simple d3.js visualizations</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+  </head>
+  <body>
+    <div class="container">
+      <!-- Our d3.js visualization will appear in #chart -->
+      <div id="chart"></div>
+    </div>
+    
+  	<!-- <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script> -->
+  	<script src="boston_neighborhoods.json"></script>
     <script src="boston_rodents.json"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <style>
-body {
-    position: absolute;
-    font-family: "Proxima Nova", "Montserrat", sans-serif;
-}
-h1, h2 {
-    position: absolute;
-    left: 10px;
-    font-size: 1.3em;
-    font-weight: 100;
-}
-h2 {
-    top: 30px;
-    font-size: 1em;
-}
-.incident {
-    fill: steelblue;
-}
-.hover {
-    fill: yellow;   
-}
-    </style>
-</head>
-<body>
-    <h1>Rodent Incidents in Boston</h1>
-    <h2></h2>
-    <script>
-    var width = 700;
-    var height = 580;
-    var svg = d3.select( "body" )
-        .append( "svg" )
-        .attr( "width", width )
-        .attr( "height", height );
-    var g = svg.append( "g" );
-    var albersProjection = d3.geo.albers()
-        .scale( 190000 )
-        .rotate( [71.057,0] )
-        .center( [0, 42.313] )
-        .translate( [width/2,height/2] );
-    var geoPath = d3.geo.path()
-        .projection( albersProjection );
-    g.selectAll( "path" )
-        .data( neighborhoods_json.features )
-        .enter()
-        .append( "path" )
-        .attr( "fill", "#ccc" )
-        .attr( "stroke", "#333")
-        .attr( "d", geoPath );
-    var rodents = svg.append( "g" );
-    rodents.selectAll( "path" )
-        .data( rodents_json.features )
-        .enter()
-        .append( "path" )
-        .attr( "fill", "#900" )
-        .attr( "stroke", "#999" )
-        .attr( "d", geoPath )
-        .attr("class","incident")
-        .on("mouseover", function(d){
-            d3.select("h2").text(d.properties.LOCATION_STREET_NAME);
-            d3.select(this).attr("class","incident hover");
-        })
-        .on("mouseout", function(d){
-            d3.select("h2").text("");
-            d3.select(this).attr("class","incident");
-        });
-    </script>
-</body>
+    <!-- jQuery and lodash -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+
+    <!-- d3.js -->
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <!-- <script src="d3-tip.js"></script> -->
+
+
+    <!-- Our visualization code -->
+    <script src="worldmap.js"></script>
+  </body>
 </html>
