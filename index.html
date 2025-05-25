@@ -4,293 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Approachable Fit | Get Fit, Feel Fab!</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* Header */
-        header {
-            position: sticky;
-            top: 0;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: background 0.3s ease;
-        }
-
-        header.scrolled {
-            background: rgba(0, 0, 0, 0.95);
-        }
-
-        header img.logo {
-            height: 50px;
-            transition: transform 0.3s ease;
-        }
-
-        header img.logo:hover {
-            transform: scale(1.1);
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 1rem;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #ff6b6b;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: url('https://source.unsplash.com/random/1920x1080/?fitness') no-repeat center/cover;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: slideIn 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            background: #ff6b6b;
-            color: #fff;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: #ff8787;
-            transform: translateY(-5px);
-        }
-
-        /* Quiz Section */
-        .quiz {
-            padding: 4rem 2rem;
-            background: #fff;
-            color: #333;
-            text-align: center;
-        }
-
-        .quiz h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .quiz form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .quiz select, .quiz button {
-            padding: 0.8rem;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: none;
-            width: 300px;
-            max-width: 100%;
-        }
-
-        .quiz select {
-            background: #f0f0f0;
-        }
-
-        .quiz button {
-            background: #4ecdc4;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .quiz button:hover {
-            background: #45b7aa;
-        }
-
-        #quiz-result {
-            margin-top: 1rem;
-            font-weight: 600;
-            color: #ff6b6b;
-        }
-
-        /* Community Section */
-        .community {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
-            text-align: center;
-        }
-
-        .community h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .community-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .community-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 1.5rem;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .community-card:hover {
-            transform: scale(1.05);
-        }
-
-        .community-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            background: #333;
-            color: #fff;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        footer a {
-            color: #ff6b6b;
-            text-decoration: none;
-        }
-
-        /* Animations */
-        @keyframes slideIn {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.2rem; }
-            nav a { margin: 0 0.5rem; }
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <img src="https://via.placeholder.com/50?text=Logo" alt="Approachable Fit Logo" class="logo">
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#workouts">Workouts</a>
-            <a href="#community">Community</a>
-            <a href="#contact">Contact</a>
+<body class="bg-gradient-to-br from-red-400 to-teal-400 text-white font-poppins">
+    <!-- Header -->
+    <header class="sticky top-0 bg-black bg-opacity-80 py-4 px-6 flex justify-between items-center z-10 transition-all duration-300" id="header">
+        <img src="https://via.placeholder.com/50?text=Logo" alt="Approachable Fit Logo" class="h-12 transform hover:scale-110 transition-transform duration-300">
+        <nav class="flex space-x-4">
+            <a href="#home" class="text-white font-semibold hover:text-red-400 transition-colors duration-300">Home</a>
+            <a href="#workouts" class="text-white font-semibold hover:text-red-400 transition-colors duration-300">Workouts</a>
+            <a href="#community" class="text-white font-semibold hover:text-red-400 transition-colors duration-300">Community</a>
+            <a href="#contact" class="text-white font-semibold hover:text-red-400 transition-colors duration-300">Contact</a>
         </nav>
     </header>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Move Easy, Love Hard!</h1>
-            <p>Join our approachable fitness fam and crush your goals with a smile!</p>
-            <a href="#join" class="cta-button">Start Sweating!</a>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center relative" style="background-image: url('https://source.unsplash.com/random/1920x1080/?fitness');" id="home">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 animate-slide-in">Move Easy, Love Hard!</h1>
+            <p class="text-xl md:text-2xl mb-6">Join our approachable fitness fam and crush your goals with a smile!</p>
+            <a href="#join" class="inline-block bg-red-400 text-white font-semibold py-3 px-6 rounded-full text-lg hover:bg-red-300 hover:-translate-y-1 transition-all duration-300">Start Sweating!</a>
         </div>
     </section>
 
-    <section class="quiz">
-        <h2>Find Your Fitness Vibe</h2>
-        <form id="fitness-quiz">
-            <select id="goal" required>
+    <!-- Quiz Section -->
+    <section class="py-16 px-6 bg-white text-gray-800 text-center">
+        <h2 class="text-4xl font-bold mb-6">Find Your Fitness Vibe</h2>
+        <form id="fitness-quiz" class="flex flex-col items-center gap-4 max-w-md mx-auto">
+            <select id="goal" class="w-full max-w-xs p-3 rounded-md bg-gray-100 text-gray-800" required>
                 <option value="" disabled selected>What's your goal?</option>
                 <option value="strength">Build Strength</option>
                 <option value="stamina">Boost Stamina</option>
                 <option value="zen">Find Zen</option>
             </select>
-            <button type="submit">Get My Plan!</button>
+            <button type="submit" class="bg-teal-400 text-white font-semibold py-3 px-6 rounded-md hover:bg-teal-500 transition-colors duration-300">Get My Plan!</button>
         </form>
-        <div id="quiz-result"></div>
+        <div id="quiz-result" class="mt-4 font-semibold text-red-400"></div>
     </section>
 
-    <section class="community" id="community">
-        <h2>Our Fit Fam</h2>
-        <div class="community-grid">
-            <div class="community-card">
-                <img src="https://source.unsplash.com/random/300x150/?gym" alt="Community Member">
-                <p>"Lost 10 lbs and gained a squad!" - Sarah</p>
+    <!-- Community Section -->
+    <section class="py-16 px-6 bg-gradient-to-br from-teal-400 to-red-400 text-center" id="community">
+        <h2 class="text-4xl font-bold mb-8">Our Fit Fam</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div class="bg-white bg-opacity-90 p-6 rounded-lg transform hover:scale-105 transition-transform duration-300">
+                <img src="https://source.unsplash.com/random/300x150/?gym" alt="Community Member" class="w-full h-40 object-cover rounded-md mb-4">
+                <p class="text-gray-800">"Lost 10 lbs and gained a squad!" - Sarah</p>
             </div>
-            <div class="community-card">
-                <img src="https://source.unsplash.com/random/300x150/?yoga" alt="Community Member">
-                <p>"Yoga with Approachable Fit changed my life!" - Mike</p>
+            <div class="bg-white bg-opacity-90 p-6 rounded-lg transform hover:scale-105 transition-transform duration-300">
+                <img src="https://source.unsplash.com/random/300x150/?yoga" alt="Community Member" class="w-full h-40 object-cover rounded-md mb-4">
+                <p class="text-gray-800">"Yoga with Approachable Fit changed my life!" - Mike</p>
             </div>
-            <div class="community-card">
-                <img src="https://source.unsplash.com/random/300x150/?running" alt="Community Member">
-                <p>"Ran my first 5K thanks to the crew!" - Jen</p>
+            <div class="bg-white bg-opacity-90 p-6 rounded-lg transform hover:scale-105 transition-transform duration-300">
+                <img src="https://source.unsplash.com/random/300x150/?running" alt="Community Member" class="w-full h-40 object-cover rounded-md mb-4">
+                <p class="text-gray-800">"Ran my first 5K thanks to the crew!" - Jen</p>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Approachable Fit. <a href="#privacy">Privacy</a> | <a href="#terms">Terms</a></p>
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-6 text-center">
+        <p>© 2025 Approachable Fit. <a href="#privacy" class="text-red-400 hover:text-red-300">Privacy</a> | <a href="#terms" class="text-red-400 hover:text-red-300">Terms</a></p>
     </footer>
 
     <script>
         // Sticky header effect
         window.addEventListener('scroll', () => {
-            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+            const header = document.getElementById('header');
+            header.classList.toggle('bg-opacity-95', window.scrollY > 50);
         });
 
         // Quiz functionality
-        document.getElementById('fitness-quiz').addEventListener('submit', (e) => {
+        document.getElementById('fitness-quiz').addEventListenerAward-winning: ('submit', (e) => {
             e.preventDefault();
             const goal = document.getElementById('goal').value;
             const resultDiv = document.getElementById('quiz-result');
@@ -302,5 +88,15 @@
             resultDiv.textContent = messages[goal] || "Pick a goal to get started!";
         });
     </script>
+
+    <style>
+        @keyframes slide-in {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-in {
+            animation: slide-in 1s ease-out;
+        }
+    </style>
 </body>
 </html>
