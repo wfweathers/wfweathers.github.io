@@ -1,34 +1,306 @@
-<!doctype html>
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approachable Fit | Get Fit, Feel Fab!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    <title>Base template for simple d3.js visualizations</title>
+        body {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
 
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+        }
 
-  </head>
-  <body>
-    <div class="container">
-      <!-- Our d3.js visualization will appear in #chart -->
-      <div id="chart"></div>
-    </div>
-    
-  	<!-- <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script> -->
-  	<script src="boston_neighborhoods.json"></script>
-    <script src="boston_rodents.json"></script>
-    <!-- jQuery and lodash -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+        header img.logo {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
 
-    <!-- d3.js -->
-    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
-    <script src="https://d3js.org/d3.v3.js"></script>
-    <!-- <script src="d3-tip.js"></script> -->
+        header img.logo:hover {
+            transform: scale(1.1);
+        }
 
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
 
-    <!-- Our visualization code -->
-    <script src="worldmap.js"></script>
-  </body>
+        nav a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: url('https://source.unsplash.com/random/1920x1080/?fitness') no-repeat center/cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: #ff6b6b;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #ff8787;
+            transform: translateY(-5px);
+        }
+
+        /* Quiz Section */
+        .quiz {
+            padding: 4rem 2rem;
+            background: #fff;
+            color: #333;
+            text-align: center;
+        }
+
+        .quiz h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quiz select, .quiz button {
+            padding: 0.8rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            width: 300px;
+            max-width: 100%;
+        }
+
+        .quiz select {
+            background: #f0f0f0;
+        }
+
+        .quiz button {
+            background: #4ecdc4;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .quiz button:hover {
+            background: #45b7aa;
+        }
+
+        #quiz-result {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #ff6b6b;
+        }
+
+        /* Community Section */
+        .community {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
+            text-align: center;
+        }
+
+        .community h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .community-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .community-card:hover {
+            transform: scale(1.05);
+        }
+
+        .community-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            nav a { margin: 0 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://via.placeholder.com/50?text=Logo" alt="Approachable Fit Logo" class="logo">
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#workouts">Workouts</a>
+            <a href="#community">Community</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Move Easy, Love Hard!</h1>
+            <p>Join our approachable fitness fam and crush your goals with a smile!</p>
+            <a href="#join" class="cta-button">Start Sweating!</a>
+        </div>
+    </section>
+
+    <section class="quiz">
+        <h2>Find Your Fitness Vibe</h2>
+        <form id="fitness-quiz">
+            <select id="goal" required>
+                <option value="" disabled selected>What's your goal?</option>
+                <option value="strength">Build Strength</option>
+                <option value="stamina">Boost Stamina</option>
+                <option value="zen">Find Zen</option>
+            </select>
+            <button type="submit">Get My Plan!</button>
+        </form>
+        <div id="quiz-result"></div>
+    </section>
+
+    <section class="community" id="community">
+        <h2>Our Fit Fam</h2>
+        <div class="community-grid">
+            <div class="community-card">
+                <img src="https://source.unsplash.com/random/300x150/?gym" alt="Community Member">
+                <p>"Lost 10 lbs and gained a squad!" - Sarah</p>
+            </div>
+            <div class="community-card">
+                <img src="https://source.unsplash.com/random/300x150/?yoga" alt="Community Member">
+                <p>"Yoga with Approachable Fit changed my life!" - Mike</p>
+            </div>
+            <div class="community-card">
+                <img src="https://source.unsplash.com/random/300x150/?running" alt="Community Member">
+                <p>"Ran my first 5K thanks to the crew!" - Jen</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Approachable Fit. <a href="#privacy">Privacy</a> | <a href="#terms">Terms</a></p>
+    </footer>
+
+    <script>
+        // Sticky header effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Quiz functionality
+        document.getElementById('fitness-quiz').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const goal = document.getElementById('goal').value;
+            const resultDiv = document.getElementById('quiz-result');
+            const messages = {
+                strength: "Let’s pump some iron! Check out our strength training plans.",
+                stamina: "Ready to go the distance? Try our cardio workouts!",
+                zen: "Find your calm with our yoga and mindfulness sessions."
+            };
+            resultDiv.textContent = messages[goal] || "Pick a goal to get started!";
+        });
+    </script>
+</body>
 </html>
